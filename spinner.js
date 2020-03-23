@@ -1,4 +1,8 @@
 const spinner = document.getElementById("spinner");
+const dataSection = document.getElementById("data");
+const dataColumn = document.getElementById("data-column");
+const mybutton = document.getElementById("scrollBtn");
+let getPicsBtn = document.getElementById("intro-button");
 function showSpinner() {
     spinner.className = "show";
     setTimeout(() => {
@@ -10,33 +14,19 @@ function hideSpinner() {
   spinner.className = spinner.className.replace("show", "");
 }
 
-function loadData() {
-    showSpinner()
-    fetch('https://randomuser.me/api/')
-        .then(response => response.json())
-        .then(data => {
-            hideSpinner()
-            console.log(data)
-        });
-}
 function searchRover() {
-    showSpinner()
+    getPicsBtn.innerText = "Loading......";
+    dataColumn.className = dataColumn.className.replace("data-column-two", "data-class")
     fetch('https://pixabay.com/api/?key=10841974-81bbf55d6105ea4bf3b851162&q=yellow+flowers&image_type=photo&pretty=true', {
-        method: 'GET',
-        // mode: 'no-cors'
-        // headers: new Headers({
-        //     "Content-Type": "application/json"
-        //     // 'Access-Control-Allow-Origin': '*'
-        // })
+        method: 'GET'
     }).then((res) => res.json())
         .then((data) => {
                 const results = data.hits;
-                console.log(results);
                 results.map(image => {
                     document.getElementById("data").innerHTML+=`
                     <div class="col-md-4 py-2"">
                         <div class="card mt-4 h-100 text-white bg-dark">
-                            <img class="card-img-top" src=${image.largeImageURL} alt="Card image cap">
+                            <img class="card-img-top" src=${image.webformatURL} alt="Card image cap">
                             <div class="card-body">
                             <h5 class="card-title">${image.tags}</h5>
                              <h5 class="card-title">${image.type}</h5>
@@ -45,10 +35,30 @@ function searchRover() {
                             </div>
                         </div>
                     </div>`;
-                    console.log(image)
                 })
+            dataSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            })
+            getPicsBtn.innerText = "Get Images";
         }
        
         )
         .catch((err) => console.log(err)) 
+}
+
+//Number is in pixels
+window.onscroll = function () { scrollFunction() };
+
+function scrollFunction() {
+    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
+}
+
+function topFunction() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
