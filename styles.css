@@ -34,7 +34,7 @@ h2 {
   flex-flow: column;
 }
 
-.logo img {
+.logo img {99999999
   float: left;
   left: 0;
   padding-top: 20px;
@@ -168,6 +168,9 @@ h2 {
   padding: 15px;
   border-radius: 10px;
   font-size: 18px;
+}
+.card-image {
+  height: 300px;
 }
 
 #scrollBtn:hover {

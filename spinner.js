@@ -26,7 +26,7 @@ function searchRover() {
                     document.getElementById("data").innerHTML+=`
                     <div class="col-md-4 py-2"">
                         <div class="card mt-4 h-100 text-white bg-dark">
-                            <img class="card-img-top" src=${image.webformatURL} alt="Card image cap">
+                            <img class="card-img-top card-image" src=${image.webformatURL} alt="Card image cap">
                             <div class="card-body">
                             <h5 class="card-title">${image.tags}</h5>
                              <h5 class="card-title">${image.type}</h5>
